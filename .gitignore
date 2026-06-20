@@ -1,0 +1,8 @@
+# Configurazione locale dell'editor / strumenti (non parte del sito)
+.claude/
+
+# Documentazione interna di lavoro (non necessaria all'anteprima)
+CLAUDE.md
+
+# Eventuali backup git
+.git_corrotto_bak/
