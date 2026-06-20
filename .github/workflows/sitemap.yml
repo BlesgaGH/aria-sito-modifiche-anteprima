@@ -1,0 +1,40 @@
+name: Aggiorna sitemap
+
+# Si attiva quando vengono aggiunte/modificate pagine .html sul branch main.
+# Il commit automatico tocca solo sitemap.xml (non .html), quindi non ri-attiva
+# il workflow: nessun loop.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+
+permissions:
+  contents: write
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Genera sitemap.xml
+        run: python tools/generate_sitemap.py
+
+      - name: Commit se la sitemap è cambiata
+        run: |
+          if ! git diff --quiet sitemap.xml; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "Auto-aggiorna sitemap.xml [skip ci]"
+            git push
+          else
+            echo "Nessuna modifica alla sitemap."
+          fi
