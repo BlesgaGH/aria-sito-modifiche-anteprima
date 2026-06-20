@@ -1,7 +1,7 @@
 # Sitemap.xml + script di generazione + link in robots.txt
 
 **Data:** 2026-06-20 19:02
-**Stato:** 🟡 In attesa di approvazione
+**Stato:** ✅ COMPLETATO (2026-06-20)
 **Tipo:** Nuova funzionalità (SEO)
 
 ## 1. Obiettivo
@@ -88,4 +88,16 @@ possibile estensione futura, non incluso in questa implementazione salvo tua ric
 
 ## Implementazione realizzata
 
-*(da compilare dopo l'approvazione e l'esecuzione)*
+**Decisioni approvate:** approccio OK · script in Python · aggiornato anche l'originale (solo stavolta) · GitHub Action inclusa subito. Per il `robots.txt` si è scelto di **mantenere `Disallow: /`** (l'anteprima resta non indicizzata) aggiungendo solo la riga `Sitemap:`.
+
+**File creati/modificati (copia + originale):**
+- `tools/generate_sitemap.py` — script che scansiona le `.html`, esclude `brochure/`, `tools/`, `assets/`, `docs/` e cartelle nascoste, e genera la sitemap.
+- `sitemap.xml` — 30 URL (15 IT + 15 EN), dominio `https://www.aria.srl`, con `lastmod`/`changefreq`/`priority`. `index.html` → `/`, `en/index.html` → `/en/`.
+- `robots.txt` — aggiunta `Sitemap: https://www.aria.srl/sitemap.xml`.
+- `.github/workflows/sitemap.yml` — rigenera e committa la sitemap a ogni push di file `.html` (trigger su `**.html` → nessun loop).
+
+**Pubblicazione:**
+- Copia → commit `5571e27`, push su `aria-sito-modifiche-anteprima`. Verificato live: `sitemap.xml` HTTP 200 con 30 URL, `robots.txt` corretto.
+- Originale → commit `8da19a3`, push su `aria-sito-anteprima` (commit selettivo: le modifiche preesistenti non correlate sono rimaste non committate).
+
+**Nota per la produzione (Aruba / aria.srl):** al go-live ricordarsi di togliere `Disallow: /` dal `robots.txt`, altrimenti il sito resta invisibile a Google nonostante la sitemap.
