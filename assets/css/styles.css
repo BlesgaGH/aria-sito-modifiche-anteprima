@@ -338,7 +338,8 @@ a.card{display:block;cursor:pointer}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
 }
-@media (max-width:760px){
+/* Menu a tendina (hamburger) anche su tablet: evita la sovrapposizione menu/logo ~768px */
+@media (max-width:900px){
   .main-nav{position:fixed;inset:84px 0 auto 0;flex-direction:column;background:#fff;
     padding:1.5rem 24px;gap:1.2rem;box-shadow:var(--shadow-lg);transform:translateY(-130%);
     transition:transform .4s ease;border-top:1px solid var(--line)}
@@ -349,6 +350,8 @@ a.card{display:block;cursor:pointer}
   .nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .nav-toggle.active span:nth-child(2){opacity:0}
   .nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
+@media (max-width:760px){
   .section{padding:4rem 0}
   .cards-grid,.pub-grid{grid-template-columns:1fr}
   .cta-inner{padding:2.2rem;flex-direction:column;align-items:flex-start}
