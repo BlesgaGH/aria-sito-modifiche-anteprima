@@ -21,6 +21,7 @@ Pubblicare in produzione su Aruba la versione aggiornata del sito (modifiche est
 
 ## 2. Scenario e assunzioni
 
+- **⚠️ Sito attuale = WordPress** (PHP + database MySQL). Lo si sostituisce con un sito **statico**. Implicazioni: il backup deve includere **anche il database** (export phpMyAdmin), e prima dell'upload va **rimosso WordPress** dalla webroot (`wp-admin/`, `wp-content/`, `wp-includes/`, `index.php`, `wp-*.php`, vecchio `.htaccess`). I vecchi permalink (`/chi-siamo/`) cambiano in `/chi-siamo.html` → valutare **redirect 301**. Dettagli operativi nella guida passo-passo `2026-06-29-guida-deploy-aruba-passo-passo.md`.
 - **Hosting:** Aruba Linux condiviso (Apache) → supporta `.htaccess`.
 - **Upload:** client FTP/FTPS (es. FileZilla). Nessun git/SSH lato server.
 - **Dominio:** `aria.srl` è **già attivo** e puntato all'hosting; HTTPS già presente (il sito attuale è online). Quindi DNS e certificato **non** vanno creati da zero — solo verificati.

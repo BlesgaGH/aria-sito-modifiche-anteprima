@@ -20,6 +20,14 @@
 </IfModule>
 
 # ----------------------------------------------------------------------------
+#  1bis) Pagina d'ingresso: prima index.html (sito statico), poi index.php.
+#        Rete di sicurezza nel caso restasse un index.php del vecchio WordPress.
+# ----------------------------------------------------------------------------
+<IfModule mod_dir.c>
+  DirectoryIndex index.html index.htm index.php
+</IfModule>
+
+# ----------------------------------------------------------------------------
 #  2) Security header — LIVELLO 1 (sicuri, attivi da subito)
 # ----------------------------------------------------------------------------
 <IfModule mod_headers.c>
