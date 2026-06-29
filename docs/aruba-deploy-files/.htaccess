@@ -1,0 +1,49 @@
+# =============================================================================
+#  .htaccess — ARIA Srl (produzione Aruba/Apache)
+#  Caricare questo file nella RADICE del sito (webroot) via FTP.
+#  NB: su GitHub Pages questo file è ignorato; serve solo in produzione.
+# =============================================================================
+
+# ----------------------------------------------------------------------------
+#  1) Forma canonica del sito: HTTPS + www  (coerente con i tag <link canonical>)
+# ----------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Forza HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://www.aria.srl%{REQUEST_URI} [L,R=301]
+
+  # Forza www
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://www.aria.srl%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ----------------------------------------------------------------------------
+#  2) Security header — LIVELLO 1 (sicuri, attivi da subito)
+# ----------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # --- HSTS: forza HTTPS lato browser per 1 anno. ATTIVARE SOLO dopo aver
+  #     verificato che HTTPS funzioni stabilmente su TUTTO il dominio
+  #     (decommentare quando deciso). Difficile da revocare in fretta.
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ----------------------------------------------------------------------------
+#  3) Content-Security-Policy — LIVELLO 2 (DA ATTIVARE DOPO IL PRIMO DEPLOY)
+#     Tenuta commentata al primo rilascio: una CSP troppo stretta può rompere
+#     la mappa Google (post-consenso) o gli stili inline. Attivare e testare
+#     ogni pagina (mappa, hover icone, form) prima di lasciarla stabile.
+# ----------------------------------------------------------------------------
+# <IfModule mod_headers.c>
+#   Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+# </IfModule>
+
+# ----------------------------------------------------------------------------
+#  4) Pagina di errore 404 personalizzata (se presente 404.html nella root)
+# ----------------------------------------------------------------------------
+ErrorDocument 404 /404.html
