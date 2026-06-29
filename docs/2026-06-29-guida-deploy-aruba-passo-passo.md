@@ -71,17 +71,21 @@ Nel pannello destro, dopo il login, potresti trovarti in `/` oppure dentro una c
 
 I file da soli **non** contengono i contenuti del sito WordPress (pagine, testi, impostazioni): quelli stanno nel **database MySQL**, che NON si scarica via FTP. Va esportato a parte.
 
+> ℹ️ **Il file `.sql` non esiste ancora: lo crei TU adesso con l'Esporta**, e il browser lo scarica. Non è un file da cercare nel pannello.
+
 1. Nel pannello Aruba apri **phpMyAdmin** (sezione Database / MySQL → "Gestisci" / "Accedi a phpMyAdmin").
-   - Se non ricordi nome DB / utente / password, li trovi dentro `wp-config.php` (che ora hai nel backup): cerca `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`.
-2. In phpMyAdmin, a sinistra **seleziona il database** del sito (quello indicato in `DB_NAME`).
-3. Clicca la scheda **Esporta** in alto.
-4. Metodo **Rapido**, formato **SQL** → **Esegui**.
-5. Salva il file `.sql` nella cartella di backup, es. `Desktop\backup-aria-srl-2026-06-29\database.sql`.
-6. **Verifica** che il file `.sql` non sia vuoto (qualche centinaio di KB o più).
+2. **Qual è il database di WordPress?** È **`Sql957059_1`** — si riconosce dalle tabelle con prefisso **`ar_`** (`ar_posts`, `ar_options`, `ar_users`…; c'è anche il plugin SEO **Rank Math**). Gli altri (`Sql957059_2…5`) sono slot Aruba di norma vuoti.
+   - *(Se servisse: nome DB / utente / password sono dentro `wp-config.php`, che ora hai nel backup file: cerca `DB_NAME`, `DB_USER`, `DB_PASSWORD`.)*
+3. **Modo più semplice e completo** — esporta tutti i database in un colpo solo: con phpMyAdmin sulla schermata iniziale (livello server, elenco di tutti i database), clicca la scheda **Esporta** in alto → Metodo **Rapido** → Formato **SQL** → **Esegui**.
+   - *In alternativa, solo WordPress:* clicca prima **`Sql957059_1`** nel pannello sinistro, poi **Esporta → Rapido → SQL → Esegui**.
+4. Il browser **scarica un file `.sql`** (es. `localhost.sql` o `Sql957059_1.sql`): **quello è il backup**. Salvalo nella cartella di backup, rinominandolo es. `aria-database-2026-06-29.sql`.
+5. **Verifica** che il file `.sql` non sia vuoto: deve pesare **almeno qualche centinaio di KB**. Se è minuscolo (poche righe), rifai l'export.
 
 > 🟦 Se il pannello Aruba offre un **"Backup/Snapshot" automatico** del sito, attivalo come **terza** copia di sicurezza (file + DB insieme). Comodo per ripristini rapidi.
 
-> ✅ A fine FASE 3 devi avere: **(a)** i file del sito, **(b)** il file `database.sql`. Solo allora puoi procedere.
+> 🔎 **Per i redirect 301 (FASE 8):** il sito usa **Rank Math**, quindi la vecchia sitemap è in `https://www.aria.srl/sitemap_index.xml`. **Prima di rimuovere WordPress** aprila nel browser e salvala (File → Salva pagina) — serve a ricavare i vecchi URL.
+
+> ✅ A fine FASE 3 devi avere: **(a)** i file del sito, **(b)** il file `.sql` del database. Solo allora puoi procedere.
 
 ---
 
