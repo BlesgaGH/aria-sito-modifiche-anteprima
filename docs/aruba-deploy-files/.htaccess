@@ -10,6 +10,42 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # ==========================================================================
+  #  Redirect 301: vecchi URL WordPress -> nuove pagine statiche .html
+  #  (messi PRIMA del redirect canonico per fare un solo "salto".)
+  #  Gestiscono sia con sia senza barra finale (/?$).
+  # ==========================================================================
+  # --- Pagine IT ---
+  RewriteRule ^servizi/?$                       https://www.aria.srl/servizi.html [R=301,L]
+  RewriteRule ^progetti/?$                       https://www.aria.srl/progetti.html [R=301,L]
+  RewriteRule ^pubblicazioni/?$                  https://www.aria.srl/pubblicazioni.html [R=301,L]
+  RewriteRule ^contatti/?$                       https://www.aria.srl/contatti.html [R=301,L]
+  RewriteRule ^sicurezza-industriale/?$          https://www.aria.srl/sicurezza-industriale.html [R=301,L]
+  RewriteRule ^ambienti-di-lavoro/?$             https://www.aria.srl/ambienti-di-lavoro.html [R=301,L]
+  RewriteRule ^affidabilita-e-manutenibilita/?$  https://www.aria.srl/affidabilita-e-manutenibilita.html [R=301,L]
+  RewriteRule ^sistemi-di-gestione/?$            https://www.aria.srl/sistemi-di-gestione.html [R=301,L]
+  RewriteRule ^formazione-e-addestramento/?$     https://www.aria.srl/formazione-e-addestramento.html [R=301,L]
+  RewriteRule ^fattori-umani/?$                  https://www.aria.srl/fattori-umani.html [R=301,L]
+  RewriteRule ^privacy-policy/?$                 https://www.aria.srl/privacy.html [R=301,L]
+
+  # --- Pagine EN ---
+  RewriteRule ^en/contact/?$                     https://www.aria.srl/en/contact.html [R=301,L]
+  RewriteRule ^en/projects/?$                    https://www.aria.srl/en/projects.html [R=301,L]
+  RewriteRule ^en/publications/?$                https://www.aria.srl/en/publications.html [R=301,L]
+  RewriteRule ^en/industrial-safety/?$           https://www.aria.srl/en/industrial-safety.html [R=301,L]
+  RewriteRule ^en/workplaces/?$                  https://www.aria.srl/en/workplaces.html [R=301,L]
+  RewriteRule ^en/management-systems/?$          https://www.aria.srl/en/management-systems.html [R=301,L]
+  RewriteRule ^en/reliability-and-maintainability/?$ https://www.aria.srl/en/reliability-maintainability.html [R=301,L]
+  RewriteRule ^en/education-training/?$          https://www.aria.srl/en/training.html [R=301,L]
+  RewriteRule ^en/home-english/?$                https://www.aria.srl/en/ [R=301,L]
+
+  # --- PDF (vecchi percorsi WordPress /wp-content/uploads -> /assets/docs) ---
+  RewriteRule ^wp-content/uploads/2022/05/Aria-Srl_Brochure_ITA\.pdf$ https://www.aria.srl/assets/docs/Aria-Srl_Brochure_ITA.pdf [R=301,L]
+  RewriteRule ^wp-content/uploads/2025/01/ISO-9001-CERT-16805-2005-AQ-TRI-SINCERT-3-it-IT-20231110-20231110080658-1\.pdf$ https://www.aria.srl/assets/docs/ISO-9001-Certificato-ARIA.pdf [R=301,L]
+
+  # ==========================================================================
+  #  Redirect canonico: HTTPS + www  (per tutto il resto)
+  # ==========================================================================
   # Forza HTTPS
   RewriteCond %{HTTPS} !=on
   RewriteRule ^ https://www.aria.srl%{REQUEST_URI} [L,R=301]
