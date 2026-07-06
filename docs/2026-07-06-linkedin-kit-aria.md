@@ -109,9 +109,13 @@ qualificato + segnali positivi per la SEO.
 
 ## E. Dopo la creazione della pagina
 
-- [ ] Comunicare l'URL definitivo della pagina → va aggiunto `sameAs` nel JSON-LD
-      della home del sito (IT+EN), commit + upload FTP delle 2 pagine. (Era il campo
-      lasciato in sospeso nelle rifiniture post-audit, proprio in attesa di questo.)
+- [x] **Pagina creata e verificata online** (2026-07-06), con logo, copertina e descrizione.
+- [x] **`sameAs` aggiunto** al JSON-LD delle home IT+EN (commit `17df05f`) con l'URL
+      definitivo `https://www.linkedin.com/company/aria-srl`.
+- [ ] **Accorciare l'URL pubblico su LinkedIn** a `aria-srl` (Modifica pagina → URL
+      pubblico) — verificato libero il 2026-07-06. Da fare PRIMA di diffondere il link.
+- [ ] **Upload FTP** di `index.html` e `en/index.html` aggiornati (contengono il sameAs).
 - [ ] Invitare i dipendenti/collaboratori a indicare ARIA Srl come datore di lavoro
       (i profili collegati danno subito credibilità alla pagina).
 - [ ] Valutare il pulsante personalizzato "Visita il sito web" → https://www.aria.srl
+- [ ] Pubblicare il post di lancio (sezione C).
