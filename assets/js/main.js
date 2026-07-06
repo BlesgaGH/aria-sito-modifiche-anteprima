@@ -44,7 +44,7 @@
       var ifr = document.createElement('iframe');
       ifr.title = title;
       ifr.loading = 'lazy';
-      ifr.referrerPolicy = 'no-referrer-when-downgrade';
+      ifr.referrerPolicy = 'strict-origin-when-cross-origin';
       ifr.src = src;
       frame.appendChild(ifr);
       consent.style.display = 'none';
@@ -81,7 +81,14 @@
       var p = Math.min((ts - start) / dur, 1);
       var eased = 1 - Math.pow(1 - p, 3);
       var val = Math.floor(eased * target);
-      el.innerHTML = val + (suffix ? '<span class="suf">' + suffix + '</span>' : '');
+      /* Costruzione DOM (niente innerHTML con stringhe concatenate) */
+      el.textContent = String(val);
+      if (suffix) {
+        var suf = document.createElement('span');
+        suf.className = 'suf';
+        suf.textContent = suffix;
+        el.appendChild(suf);
+      }
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
@@ -98,9 +105,19 @@
     counters.forEach(animateCount);
   }
 
-  /* Carosello clienti: duplica i loghi per uno scorrimento infinito senza stacchi */
+  /* Carosello clienti: duplica i loghi per uno scorrimento infinito senza stacchi.
+     Fallback loghi mancanti: gestito qui (listener in cattura: l'evento "error"
+     delle immagini non risale) perché gli onerror inline sono vietati dalla CSP
+     (script-src 'self'). Rimuove l'intera tile, non solo l'immagine. */
   var track = document.getElementById('clientsTrack');
   if (track) {
+    track.addEventListener('error', function (e) {
+      var img = e.target;
+      if (img && img.tagName === 'IMG') {
+        var tile = img.closest ? img.closest('.client-tile') : null;
+        (tile || img).remove();
+      }
+    }, true);
     var originals = Array.prototype.slice.call(track.children);
     originals.forEach(function (node) {
       var clone = node.cloneNode(true);

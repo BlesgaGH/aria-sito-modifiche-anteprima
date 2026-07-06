@@ -74,11 +74,11 @@ I file da soli **non** contengono i contenuti del sito WordPress (pagine, testi,
 > ℹ️ **Il file `.sql` non esiste ancora: lo crei TU adesso con l'Esporta**, e il browser lo scarica. Non è un file da cercare nel pannello.
 
 1. Nel pannello Aruba apri **phpMyAdmin** (sezione Database / MySQL → "Gestisci" / "Accedi a phpMyAdmin").
-2. **Qual è il database di WordPress?** È **`Sql957059_1`** — si riconosce dalle tabelle con prefisso **`ar_`** (`ar_posts`, `ar_options`, `ar_users`…; c'è anche il plugin SEO **Rank Math**). Gli altri (`Sql957059_2…5`) sono slot Aruba di norma vuoti.
+2. **Qual è il database di WordPress?** È il **primo slot MySQL del pannello Aruba** — si riconosce dalle tabelle con prefisso **`ar_`** (`ar_posts`, `ar_options`, `ar_users`…; c'è anche il plugin SEO **Rank Math**). Gli altri slot sono di norma vuoti. *(Nome esatto del DB volutamente non riportato: questo repo è pubblico.)*
    - *(Se servisse: nome DB / utente / password sono dentro `wp-config.php`, che ora hai nel backup file: cerca `DB_NAME`, `DB_USER`, `DB_PASSWORD`.)*
 3. **Modo più semplice e completo** — esporta tutti i database in un colpo solo: con phpMyAdmin sulla schermata iniziale (livello server, elenco di tutti i database), clicca la scheda **Esporta** in alto → Metodo **Rapido** → Formato **SQL** → **Esegui**.
-   - *In alternativa, solo WordPress:* clicca prima **`Sql957059_1`** nel pannello sinistro, poi **Esporta → Rapido → SQL → Esegui**.
-4. Il browser **scarica un file `.sql`** (es. `localhost.sql` o `Sql957059_1.sql`): **quello è il backup**. Salvalo nella cartella di backup, rinominandolo es. `aria-database-2026-06-29.sql`.
+   - *In alternativa, solo WordPress:* clicca prima il **DB con le tabelle `ar_`** nel pannello sinistro, poi **Esporta → Rapido → SQL → Esegui**.
+4. Il browser **scarica un file `.sql`** (es. `localhost.sql` o `<nome-db>.sql`): **quello è il backup**. Salvalo nella cartella di backup, rinominandolo es. `aria-database-2026-06-29.sql`.
 5. **Verifica** che il file `.sql` non sia vuoto: deve pesare **almeno qualche centinaio di KB**. Se è minuscolo (poche righe), rifai l'export.
 
 > 🟦 Se il pannello Aruba offre un **"Backup/Snapshot" automatico** del sito, attivalo come **terza** copia di sicurezza (file + DB insieme). Comodo per ripristini rapidi.

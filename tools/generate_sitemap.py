@@ -11,6 +11,7 @@ Uso (dalla cartella del sito o da qualunque punto):
     python tools/generate_sitemap.py
 """
 import os
+import subprocess
 from datetime import datetime, timezone
 
 # ----------------------- Configurazione -----------------------
@@ -65,6 +66,21 @@ def collect_pages():
     return sorted(pages)
 
 
+def git_lastmod(rel):
+    """Data (YYYY-MM-DD) dell'ultimo commit che tocca il file; None se git non
+    è disponibile o il file non è tracciato. Così ogni pagina ha un lastmod
+    reale invece della data di rigenerazione, uguale per tutte."""
+    try:
+        out = subprocess.run(
+            ["git", "log", "-1", "--format=%cs", "--", rel],
+            cwd=SITE_ROOT, capture_output=True, text=True, timeout=30,
+        )
+        date = out.stdout.strip()
+        return date if out.returncode == 0 and date else None
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
 def build_sitemap(pages):
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -73,8 +89,10 @@ def build_sitemap(pages):
     for rel in pages:
         filename = rel.split("/")[-1]
         loc = to_url(rel)
-        mtime = os.path.getmtime(os.path.join(SITE_ROOT, rel))
-        lastmod = datetime.fromtimestamp(mtime, tz=timezone.utc).strftime("%Y-%m-%d")
+        lastmod = git_lastmod(rel)
+        if lastmod is None:  # fallback: data di modifica su disco
+            mtime = os.path.getmtime(os.path.join(SITE_ROOT, rel))
+            lastmod = datetime.fromtimestamp(mtime, tz=timezone.utc).strftime("%Y-%m-%d")
         priority, changefreq = page_settings(filename)
         lines += [
             "  <url>",

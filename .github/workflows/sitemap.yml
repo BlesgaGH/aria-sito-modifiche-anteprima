@@ -18,6 +18,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Storia completa: serve a generate_sitemap.py per ricavare il
+          # lastmod per-file dall'ultimo commit (col checkout shallow di
+          # default tutte le date coinciderebbero con l'ultimo commit).
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
