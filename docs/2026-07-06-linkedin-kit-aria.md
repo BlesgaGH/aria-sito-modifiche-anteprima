@@ -110,10 +110,12 @@ qualificato + segnali positivi per la SEO.
 ## E. Dopo la creazione della pagina
 
 - [x] **Pagina creata e verificata online** (2026-07-06), con logo, copertina e descrizione.
-- [x] **`sameAs` aggiunto** al JSON-LD delle home IT+EN (commit `17df05f`) con l'URL
-      definitivo `https://www.linkedin.com/company/aria-srl`.
-- [ ] **Accorciare l'URL pubblico su LinkedIn** a `aria-srl` (Modifica pagina → URL
-      pubblico) — verificato libero il 2026-07-06. Da fare PRIMA di diffondere il link.
+      (Copertina: usata la versione HD 1920×325 — l'uploader LinkedIn fallisce con
+      immagini alla dimensione minima esatta 1128×191.)
+- [x] **URL pubblico accorciato**: `https://www.linkedin.com/company/aria-srl-torino`
+      (`aria-srl` risultava già occupato nonostante il 404 pubblico — il campo di
+      LinkedIn è l'unica verifica affidabile).
+- [x] **`sameAs` aggiornato** al JSON-LD delle home IT+EN con l'URL definitivo.
 - [ ] **Upload FTP** di `index.html` e `en/index.html` aggiornati (contengono il sameAs).
 - [ ] Invitare i dipendenti/collaboratori a indicare ARIA Srl come datore di lavoro
       (i profili collegati danno subito credibilità alla pagina).
