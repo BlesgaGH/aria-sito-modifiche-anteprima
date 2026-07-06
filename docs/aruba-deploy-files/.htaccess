@@ -71,21 +71,33 @@
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
-  # --- HSTS: forza HTTPS lato browser per 1 anno. ATTIVARE SOLO dopo aver
-  #     verificato che HTTPS funzioni stabilmente su TUTTO il dominio
-  #     (decommentare quando deciso). Difficile da revocare in fretta.
-  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # --- HSTS: forza HTTPS lato browser per 1 anno. ATTIVO dal 2026-07-06.
+  #     SENZA includeSubDomains, per non vincolare all'HTTPS eventuali sottodomini
+  #     (es. webmail/ftp) non ancora pronti. Si potra aggiungere dopo averli verificati.
+  #     Difficile da revocare in fretta: per annullare, rimettere max-age=0 e ricaricare.
+  Header always set Strict-Transport-Security "max-age=31536000"
 </IfModule>
 
 # ----------------------------------------------------------------------------
-#  3) Content-Security-Policy — LIVELLO 2 (DA ATTIVARE DOPO IL PRIMO DEPLOY)
-#     Tenuta commentata al primo rilascio: una CSP troppo stretta può rompere
-#     la mappa Google (post-consenso) o gli stili inline. Attivare e testare
-#     ogni pagina (mappa, hover icone, form) prima di lasciarla stabile.
+#  3) Content-Security-Policy — LIVELLO 2 — ROLLOUT IN 2 TEMPI (dal 2026-07-06)
+#     Policy validata via audit del sito (vedi docs/2026-07-06-hsts-csp-attivazione.md):
+#     copre CSS/stili inline, main.js same-origin, font self-hosted, loghi locali,
+#     mappa Google (frame-src www.google.com), JSON-LD.
+#
+#     FASE TEST (ATTIVA ORA): "Content-Security-Policy-Report-Only" → il browser NON
+#       blocca nulla, segnala solo in console eventuali violazioni. Aprire tutte le
+#       pagine (mappa, form, hover icone, hero animata, caroselli loghi, IT+EN) con la
+#       console aperta e verificare che non compaiano avvisi CSP.
+#     FASE ATTIVA (DOPO): confermato zero violazioni, COMMENTARE la riga Report-Only
+#       qui sotto e DECOMMENTARE la riga Content-Security-Policy (blocco reale).
 # ----------------------------------------------------------------------------
-# <IfModule mod_headers.c>
-#   Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
-# </IfModule>
+<IfModule mod_headers.c>
+  # FASE TEST — solo report, non blocca:
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+
+  # FASE ATTIVA — decommentare questa (e commentare la Report-Only sopra) quando confermato:
+  # Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+</IfModule>
 
 # ----------------------------------------------------------------------------
 #  4) Pagina di errore 404 personalizzata (se presente 404.html nella root)
