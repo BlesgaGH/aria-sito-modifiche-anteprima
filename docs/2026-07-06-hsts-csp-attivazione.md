@@ -2,7 +2,7 @@
 
 **Data:** 2026-07-06
 **Autore:** Claude Code (su richiesta di Gianfranco Camuncoli)
-**Stato:** ✅ Approvato e implementato nel `.htaccess` (2026-07-06). Decisioni: A = HSTS senza `includeSubDomains`; B = handler `onerror` lasciati (nessuna modifica codice); C = CSP in rollout 2 tempi (ora Report-Only). Resta: deploy FTP + verifica in incognito, poi switch alla CSP attiva.
+**Stato:** ✅ Completato (2026-07-06). Rollout eseguito: HSTS attivo (senza `includeSubDomains`); CSP prima in Report-Only, console verificata pulita in produzione → ora **CSP bloccante attiva**; aggiunto anche header **Permissions-Policy** (hardening). Riga Report-Only conservata commentata come rollback. Resta solo: ricaricare il `.htaccess` finale su Aruba via FTP.
 
 ## Panoramica
 

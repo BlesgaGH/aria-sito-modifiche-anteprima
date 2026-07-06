@@ -71,6 +71,12 @@
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
+  # --- Permissions-Policy: disattiva le funzioni del browser che il sito NON usa
+  #     (privacy/hardening). fullscreen NON incluso, per non interferire col
+  #     pulsante schermo-intero della mappa Google. geolocation off e sicuro:
+  #     la mappa mostra un indirizzo fisso, non richiede la posizione.
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=()"
+
   # --- HSTS: forza HTTPS lato browser per 1 anno. ATTIVO dal 2026-07-06.
   #     SENZA includeSubDomains, per non vincolare all'HTTPS eventuali sottodomini
   #     (es. webmail/ftp) non ancora pronti. Si potra aggiungere dopo averli verificati.
@@ -84,19 +90,20 @@
 #     copre CSS/stili inline, main.js same-origin, font self-hosted, loghi locali,
 #     mappa Google (frame-src www.google.com), JSON-LD.
 #
-#     FASE TEST (ATTIVA ORA): "Content-Security-Policy-Report-Only" → il browser NON
-#       blocca nulla, segnala solo in console eventuali violazioni. Aprire tutte le
-#       pagine (mappa, form, hover icone, hero animata, caroselli loghi, IT+EN) con la
-#       console aperta e verificare che non compaiano avvisi CSP.
-#     FASE ATTIVA (DOPO): confermato zero violazioni, COMMENTARE la riga Report-Only
-#       qui sotto e DECOMMENTARE la riga Content-Security-Policy (blocco reale).
+#     FASE TEST (conclusa il 2026-07-06): la CSP e stata prima messa in
+#       "Content-Security-Policy-Report-Only" e verificata pagina per pagina con la
+#       console del browser aperta → zero violazioni.
+#     FASE ATTIVA (dal 2026-07-06): confermata la console pulita, la CSP e ora
+#       BLOCCANTE (Content-Security-Policy). La riga Report-Only resta commentata,
+#       come riferimento / per eventuale rollback rapido.
 # ----------------------------------------------------------------------------
 <IfModule mod_headers.c>
-  # FASE TEST — solo report, non blocca:
-  Header always set Content-Security-Policy-Report-Only "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+  # FASE ATTIVA — CSP bloccante (attiva dal 2026-07-06, console verificata pulita):
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
 
-  # FASE ATTIVA — decommentare questa (e commentare la Report-Only sopra) quando confermato:
-  # Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+  # ROLLBACK — se qualcosa si rompesse, commentare la riga sopra e riattivare questa
+  # (torna in sola segnalazione, senza bloccare):
+  # Header always set Content-Security-Policy-Report-Only "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
 </IfModule>
 
 # ----------------------------------------------------------------------------
