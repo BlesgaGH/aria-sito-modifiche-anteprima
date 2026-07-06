@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#011F4F" />
+
+  <!-- Pagina di errore: non indicizzare, ma segui i link -->
+  <meta name="robots" content="noindex, follow" />
+  <title>Pagina non trovata (404) | ARIA Srl</title>
+
+  <!-- Icona -->
+  <link rel="icon" type="image/svg+xml" href="/assets/img/logo-aria.svg" />
+  <link rel="icon" type="image/png" href="/assets/img/cropped-LOGO_ARIA.png" />
+  <link rel="apple-touch-icon" href="/assets/img/LOGO_ARIA.png" />
+
+  <!-- Font e stile (percorsi ASSOLUTI: la 404 è servita mantenendo l'URL sbagliato) -->
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v=20260609-3" />
+  <link rel="stylesheet" href="/assets/css/styles.css?v=20260620-3" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="ARIA Srl — Home">
+        <img src="/assets/img/logo-aria-light.svg" alt="Logo ARIA Srl" class="brand-logo brand-logo--light" width="44" height="50" />
+        <img src="/assets/img/logo-aria.svg" alt="" aria-hidden="true" class="brand-logo brand-logo--dark" width="44" height="50" />
+        <span class="brand-text">
+          <strong>ARIA</strong>
+          <small>Analisi dei rischi industriali e ambientali</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" id="nav" aria-label="Navigazione principale">
+        <a href="/servizi.html">Servizi</a>
+        <a href="/chi-siamo.html">Chi siamo</a>
+        <a href="/progetti.html">Progetti</a>
+        <a href="/pubblicazioni.html">Pubblicazioni</a>
+        <a href="/contatti.html">Contatti</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Lingua">
+          <a href="/" class="active" aria-current="page">IT</a>
+          <span>/</span>
+          <a href="/en/">EN</a>
+        </div>
+        <a href="/contatti.html" class="btn btn-primary btn-sm">Contattaci</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Apri menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== ERRORE 404 =====
+         Usa la fascia scura .subhero (come le pagine interne): così il logo e
+         il menu bianchi dell'header trasparente restano visibili, e i .btn-ghost
+         (pensati per sfondo scuro) si vedono correttamente. -->
+    <section class="subhero" style="min-height:72vh;display:flex;align-items:center">
+      <div class="container subhero-inner" style="max-width:720px;margin-inline:auto;text-align:center">
+        <p style="font-size:clamp(5rem,18vw,10rem);line-height:1;font-weight:800;color:#fff;margin:0;letter-spacing:-.03em">404</p>
+        <h1 style="margin:.4rem 0 0">Pagina non trovata</h1>
+        <p style="max-width:520px;margin:1rem auto 0">
+          La pagina che stai cercando è stata spostata, rinominata oppure non esiste più.
+          Nessun problema: da qui puoi tornare al sito.
+        </p>
+        <p style="font-size:.95rem;max-width:520px;margin:.4rem auto 0;opacity:.85">
+          <em>Page not found — the page you are looking for doesn’t exist. Use the links below to get back on track.</em>
+        </p>
+        <div class="hero-cta" style="justify-content:center;margin-top:2rem">
+          <a href="/" class="btn btn-primary">Torna alla home</a>
+          <a href="/servizi.html" class="btn btn-ghost">Vedi i servizi</a>
+          <a href="/contatti.html" class="btn btn-ghost">Contattaci</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="/assets/img/logo-aria-light.svg" alt="ARIA Srl" width="48" height="54" />
+        <p>Analisi dei Rischi Industriali e Ambientali. Ingegneria della sicurezza dal 2004.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servizi</h4>
+        <a href="/sicurezza-industriale.html">Sicurezza industriale</a>
+        <a href="/ambienti-di-lavoro.html">Ambienti di lavoro</a>
+        <a href="/affidabilita-e-manutenibilita.html">Affidabilità &amp; RAMS</a>
+        <a href="/sicurezza-di-prodotto.html">Sicurezza di prodotto</a>
+        <a href="/sistemi-di-gestione.html">Sistemi di gestione</a>
+        <a href="/formazione-e-addestramento.html">Formazione e addestramento</a>
+        <a href="/fattori-umani.html">Fattori umani</a>
+      </div>
+      <div class="footer-col">
+        <h4>Azienda</h4>
+        <a href="/chi-siamo.html">Chi siamo</a>
+        <a href="/progetti.html">Progetti</a>
+        <a href="/pubblicazioni.html">Pubblicazioni</a>
+        <a href="/contatti.html">Contatti</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contatti</h4>
+        <a href="tel:+390115806022">+39 011 5806022</a>
+        <a href="mailto:segreteria@aria.srl">segreteria@aria.srl</a>
+        <span>Via Luigi Colli, 24 — 10129 Torino</span>
+        <span>P. IVA 08820880014</span>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> ARIA Srl — P. IVA / C.F. 08820880014 — Registro Imprese di Torino, REA TO-1002914 — Capitale sociale € 10.000,00 i.v. — Tutti i diritti riservati</span>
+      <span><a href="/privacy.html">Privacy Policy</a> · <a href="/cookie-policy.html">Cookie Policy</a></span>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js?v=20260616-2"></script>
+</body>
+</html>
