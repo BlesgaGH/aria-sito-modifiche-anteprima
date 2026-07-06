@@ -37,7 +37,7 @@ sicurezza industriale Torino", e per le ricerche del brand "ARIA Srl".
 | Clienti in sede? | Sì (mostrare l'indirizzo) + eventualmente area di servizio "Italia" |
 | Telefono | +39 011 5806022 |
 | Sito web | https://www.aria.srl |
-| Orari | Lun–Ven 9:00–18:00 *(DA CONFERMARE con orari reali dell'ufficio)* |
+| Orari | Lun–Ven 9:00–13:00 / 14:00–18:00 *(confermati il 2026-07-06; su Google inserire i due intervalli separati per la pausa pranzo)* |
 | Data di apertura | 2004 |
 
 ## C. Descrizione (max 750 caratteri — questa è ~720)
